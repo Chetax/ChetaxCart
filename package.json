@@ -1,0 +1,13 @@
+{
+  "name": "chetaxcart",
+  "version": "1.0.0",
+  "description": "An advanced E-commerce Store with features such as customizable product views, comprehensive product listings, robust search functionality, efficient cart management, a seamless checkout process, and secure payment gateway integration. This project ensures seamless navigation and a smooth user experience.",
+  "main": "server/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start":"node server/server.js",
+    "dev":"nodemon server/server.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
