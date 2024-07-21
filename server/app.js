@@ -1,10 +1,10 @@
 const express=require('express');
 const productroute=require('./route/productroute');
-const errorMiddleware=require('./utils/errorHandler');
+const ErrorHandler=require('./middleware/Error')
 const app=express();
 app.use(express.json());
 app.use("/api/v1",productroute);
 // Middle 
-app.use(errorMiddleware);
+app.use(ErrorHandler);
 
 module.exports=app;
