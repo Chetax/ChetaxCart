@@ -16,8 +16,8 @@ exports.createProduct=catchAsyncError(async (req,res,next)=>{
 
 exports.updateProduct=catchAsyncError(async (req,res,next)=>{
       let product=await Product.findById(req.params.id);
-     if(!product){
-        return next(new ErrorHandle("Product Not Found",404));}
+     if(!product)
+        return next(new ErrorHandle("Product Not Found",404));
     
     product=await Product.findByIdAndUpdate(req.params.id,req.body,{
         new:true,
@@ -28,21 +28,20 @@ exports.updateProduct=catchAsyncError(async (req,res,next)=>{
     })
 })
 
-exports.getAllproducts=catchAsyncError( async (req,res)=>{
+exports.getAllproducts=catchAsyncError( async (req,res,next)=>{
    const products=await Product.find();
+   if(!products)
+    return next(new ErrorHandle("Product Not Found",404));
    res.status(201).json({sucess:true,products})
 
 })
 
 
-exports.getProductById= catchAsyncError(async (req,res)=>{
+exports.getProductById= catchAsyncError(async (req,res,next)=>{
     
         let product=await Product.findById(req.params.id);
-        if(!product){
-            res.status(500).json({sucess:false,
-                massage:"Product Not Found"
-            })
-        }
+        if(!product)
+            return next(new ErrorHandle("Product Not Found",404));
 
           res.status(201).json({sucess :true,message:"Product Found Successfully",product});
 
@@ -50,14 +49,11 @@ exports.getProductById= catchAsyncError(async (req,res)=>{
 
 // to delete the pridcut 
 
-exports.deleteProductById=catchAsyncError(async(req,res)=>{
+exports.deleteProductById=catchAsyncError(async(req,res,next)=>{
 
         let product=await Product.findById(req.params.id);
-        if(!product){
-            res.status(500).json({sucess:false,
-                massage:"Product Not Found"
-            })
-        }
+        if(!product)
+            return next(new ErrorHandle("Product Not Found",404));
 
         product=await Product.deleteOne({_id:req.params.id});
           res.status(201).json({sucess :true,message:"Dealete Successfully"});
